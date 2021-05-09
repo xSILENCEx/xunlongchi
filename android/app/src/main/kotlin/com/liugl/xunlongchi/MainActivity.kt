@@ -1,0 +1,6 @@
+package com.liugl.xunlongchi
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
