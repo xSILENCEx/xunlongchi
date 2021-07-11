@@ -10,6 +10,7 @@ class RoundWidget extends StatefulWidget {
     required this.total,
     required this.current,
     this.init = 0,
+    this.duration = 500,
   }) : super(key: key);
 
   final Widget child;
@@ -19,17 +20,21 @@ class RoundWidget extends StatefulWidget {
 
   final int init;
 
+  final int duration;
+
   @override
   _RoundWidgetState createState() => _RoundWidgetState();
 }
 
-class _RoundWidgetState extends State<RoundWidget> with SingleTickerProviderStateMixin {
+class _RoundWidgetState extends State<RoundWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
+    _controller = AnimationController(
+        duration: Duration(milliseconds: widget.duration), vsync: this);
     _controller.value = widget.init / widget.total;
   }
 
@@ -50,7 +55,7 @@ class _RoundWidgetState extends State<RoundWidget> with SingleTickerProviderStat
       if (oldWidget.current == widget.total - 1) {
         await _controller.animateTo(
           (widget.total + 1) / widget.total,
-          duration: const Duration(milliseconds: 500),
+          duration: Duration(milliseconds: widget.duration),
           curve: Curves.ease,
         );
 
@@ -58,7 +63,7 @@ class _RoundWidgetState extends State<RoundWidget> with SingleTickerProviderStat
       } else {
         await _controller.animateTo(
           widget.current / widget.total,
-          duration: const Duration(milliseconds: 500),
+          duration: Duration(milliseconds: widget.duration),
           curve: Curves.ease,
         );
       }

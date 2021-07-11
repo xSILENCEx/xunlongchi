@@ -11,15 +11,14 @@ import 'mod/time_mod.dart';
 void main() {
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.dumpErrorToConsole(details);
-    if (kReleaseMode) {
-      exit(1);
-    }
+    if (kReleaseMode) exit(1);
   };
 
   runApp(const MyApp());
 
   //状态栏透明
-  const SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  const SystemUiOverlayStyle systemUiOverlayStyle =
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 
   SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[]);

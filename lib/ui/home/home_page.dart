@@ -37,8 +37,8 @@ class HomePage extends StatelessWidget {
 
                     //中心太极图标
                     Selector<TimeMod, int>(
-                      builder: (_, int hour, __) => _buildTj(hour ~/ 14),
-                      selector: (_, TimeMod tm) => tm.now.hour ~/ 14,
+                      builder: (_, int hour, __) => _buildTj(hour % 12),
+                      selector: (_, TimeMod tm) => tm.now.hour % 12,
                     ),
 
                     //时辰
@@ -46,11 +46,13 @@ class HomePage extends StatelessWidget {
                       builder: (_, int hour, __) => _buildShi((hour + 1) ~/ 2),
                       selector: (_, TimeMod tm) => tm.now.hour,
                     ),
+
                     //小时
                     Selector<TimeMod, int>(
                       builder: (_, int hour, __) => _buildHour(hour),
                       selector: (_, TimeMod tm) => tm.now.hour,
                     ),
+
                     //分
                     Transform.scale(
                       scale: 0.92,
@@ -59,6 +61,7 @@ class HomePage extends StatelessWidget {
                         selector: (_, TimeMod tm) => tm.now.minute,
                       ),
                     ),
+
                     //秒
                     Selector<TimeMod, int>(
                       builder: (_, int second, __) => _buildSed(second),
@@ -80,6 +83,7 @@ class HomePage extends StatelessWidget {
       total: 2,
       init: time,
       current: time,
+      duration: 800,
       child: const CenterTaiji(),
     );
   }
@@ -110,7 +114,10 @@ class HomePage extends StatelessWidget {
       total: 12,
       init: time,
       current: time,
-      child: Stack(alignment: Alignment.center, children: const <Widget>[Shichen(), Organ()]),
+      child: Stack(
+        alignment: Alignment.center,
+        children: const <Widget>[Shichen(), Organ()],
+      ),
     );
   }
 }
